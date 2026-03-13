@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divide &amp; Conquer Algorithm Visualizer</title>
+  <meta name="description" content="Interactive step-by-step visualization of Divide and Conquer algorithms with time complexity analysis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">⚔️</span>
+        <div>
+          <h1>D&amp;C Visualizer</h1>
+          <p class="subtitle">Divide &amp; Conquer</p>
+        </div>
+      </div>
+    </div>
+    <div class="algo-category">
+      <span class="category-label">Sorting</span>
+      <ul id="algo-list-sorting">
+        <li data-algo="mergeSort" class="active">
+          <span class="algo-icon">📊</span>
+          <span class="algo-name">Merge Sort</span>
+          <span class="algo-badge">O(n log n)</span>
+        </li>
+        <li data-algo="quickSort">
+          <span class="algo-icon">⚡</span>
+          <span class="algo-name">Quick Sort</span>
+          <span class="algo-badge">O(n log n)</span>
+        </li>
+      </ul>
+    </div>
+    <div class="algo-category">
+      <span class="category-label">Search &amp; Optimization</span>
+      <ul id="algo-list-search">
+        <li data-algo="minMax">
+          <span class="algo-icon">🔍</span>
+          <span class="algo-name">Min &amp; Max Finding</span>
+          <span class="algo-badge">O(n)</span>
+        </li>
+        <li data-algo="largestSubarray">
+          <span class="algo-icon">📈</span>
+          <span class="algo-name">Largest Subarray Sum</span>
+          <span class="algo-badge">O(n log n)</span>
+        </li>
+      </ul>
+    </div>
+    <div class="algo-category">
+      <span class="category-label">Geometric</span>
+      <ul id="algo-list-geo">
+        <li data-algo="closestPair">
+          <span class="algo-icon">📍</span>
+          <span class="algo-name">Closest Pair of Points</span>
+          <span class="algo-badge">O(n log n)</span>
+        </li>
+        <li data-algo="convexHull">
+          <span class="algo-icon">🔷</span>
+          <span class="algo-name">Convex Hull</span>
+          <span class="algo-badge">O(n log n)</span>
+        </li>
+      </ul>
+    </div>
+    <div class="algo-category">
+      <span class="category-label">Matrix</span>
+      <ul id="algo-list-matrix">
+        <li data-algo="matrixMultiply">
+          <span class="algo-icon">🔢</span>
+          <span class="algo-name">Matrix Multiplication</span>
+          <span class="algo-badge">O(n³)</span>
+        </li>
+        <li data-algo="strassen">
+          <span class="algo-icon">🧮</span>
+          <span class="algo-name">Strassen's Multiply</span>
+          <span class="algo-badge">O(n².⁸¹)</span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Top bar -->
+    <header id="top-bar">
+      <div class="top-bar-left">
+        <button id="sidebar-toggle" title="Toggle sidebar">☰</button>
+        <h2 id="algo-title">Merge Sort</h2>
+      </div>
+      <div class="top-bar-right">
+        <div id="phase-badge" class="phase-ready">
+          <span class="phase-dot"></span>
+          <span id="phase-text">Ready</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Visualization Area -->
+    <div id="viz-container">
+      <div id="visualization">
+        <div class="viz-placeholder">
+          <span class="placeholder-icon">🎯</span>
+          <p>Click <strong>Generate</strong> to create a dataset and begin visualization</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step Description -->
+    <div id="step-info">
+      <div id="step-phase-label"></div>
+      <p id="step-description">Select an algorithm and click "Generate" to start.</p>
+    </div>
+
+    <!-- Controls -->
+    <div id="controls">
+      <div class="controls-left">
+        <button id="btn-generate" class="btn-primary" title="Generate new data">
+          <span>🔄</span> Generate
+        </button>
+        <div class="btn-group">
+          <button id="btn-prev" class="btn-control" title="Previous step" disabled>⏮</button>
+          <button id="btn-play" class="btn-control btn-play" title="Play/Pause" disabled>▶</button>
+          <button id="btn-next" class="btn-control" title="Next step" disabled>⏭</button>
+        </div>
+      </div>
+      <div class="controls-right">
+        <div class="speed-control">
+          <label for="speed-slider">🏎️ Speed</label>
+          <input type="range" id="speed-slider" min="1" max="10" value="5">
+        </div>
+        <div id="step-counter">
+          <span id="current-step">0</span> / <span id="total-steps">0</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Complexity Panel -->
+  <aside id="complexity-panel">
+    <div class="panel-header">
+      <h3>📐 Complexity Analysis</h3>
+      <button id="panel-toggle" title="Toggle panel">◀</button>
+    </div>
+    <div id="complexity-content">
+      <div class="complexity-section">
+        <h4>🔄 Recurrence Relation</h4>
+        <div id="recurrence" class="formula-box"></div>
+      </div>
+      <div class="complexity-section">
+        <h4>🧠 Master Theorem</h4>
+        <div id="analysis" class="analysis-box"></div>
+      </div>
+      <div class="complexity-section result-section">
+        <h4>⏱️ Time Complexity</h4>
+        <div id="big-o" class="formula-box big-o-result"></div>
+      </div>
+      <div class="complexity-section">
+        <h4>💾 Space Complexity</h4>
+        <div id="space-complexity" class="formula-box"></div>
+      </div>
+      <div class="complexity-section">
+        <h4>📋 Algorithm Steps</h4>
+        <div id="algo-steps" class="steps-box"></div>
+      </div>
+    </div>
+  </aside>
+
+  <script src="algo-sorting.js"></script>
+  <script src="algo-search.js"></script>
+  <script src="algo-geometric.js"></script>
+  <script src="algo-matrix.js"></script>
+  <script src="renderers.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
